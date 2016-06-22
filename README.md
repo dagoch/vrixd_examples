@@ -12,7 +12,7 @@ If you want to use tilt swtiches, I'd recommend these:
 http://tinkersphere.com/sensors/750-tilt-switch.html
 http://tinkersphere.com/sensors/1013-mercury-tilt-switch-6mm.html
 
-**Note:** There are many different ways to connect a microcontroller wirelessly to a Unity app, including ones that don't rely on an intermediary server.  The advantages of this method are: simple, cheap, reliable and easy to debug.  Having the intermediate server lets you monitor the communication flow between your Arduino and your Unity app, and allows you to test each component individually.  It is particularly useful when doing live demos, as it gives you a continuous health check, and lets you send commands directly to Unity, for example, to reset the game state without removing the phone from the VR headset.
+**Note:** There are many different ways to connect a microcontroller wirelessly to a Unity app, including ones that don't rely on an intermediary server.  The advantages of this method are: simple, cheap, reliable and easy to debug.  Having the intermediate server lets you monitor the communication flow between your Arduino and your Unity app, and allows you to test each component individually.  It is particularly useful when doing live demos, as it gives you a continuous health check, and lets you send commands directly to Unity, for example, to reset the game state without removing the phone from the VR headset.  The one big limitation of this approach is if you want continuously-varying inputs: using REST limits the rate at which you can send data from the controller, so it is really only suitable for sending discrete values that dno't change too quickly.
 
 
 ## Software and Hardware
@@ -21,11 +21,17 @@ http://tinkersphere.com/sensors/1013-mercury-tilt-switch-6mm.html
 
 * A wifi microcontroller that can be programmed using Arduino.  Sample code is written for the Arduino Yun and the Adafruit Huzzah ESP8266 module.  
 
-* The Arduino IDE plaus the libraries for your board.
+* A switch or sensor that will be the input for your game.  Prototyping supplies like a breadboard and wires.  I also recommend using a battery to power your micrrocontroller and circuit.  If your micrcontroller board has a USB jack, you can use a USB battery to power it after you've programmed it.
+
+* The Arduino IDE plus the libraries for your board.
 
 * node.js
 
 * Unity and the SocketIO plugin by Fabio Panettieri (from the Unity asset store)
+
+* If you're building for Google Cardboard, you'll need the Cardboard library for Unity
+
+* Either XCode or the Android SDK, depending on whether you want to deploy your VR app to an iOs or Android phone.
 
 ### Choose your microcontroller
 
@@ -46,6 +52,11 @@ The sketch for the ESP8266 boards uses the ESP8266WiFi, ESP8266WiFiMulti, and ES
 ### Set up your Unity project
 
 * In Unity, we use the SocketIO plugin by Fabio Panettieri.  The sample project in this repo already has the plugin, but if you want to create your own project, you can download the plugin from the Asset Store.  It's free.
+
+* For Google Cardboard, you need to install the Google Cardboard plugin.  Again, the sample project already includes this plugin.  
+
+* If, instead, you want to use Gear VR, you'll need to remove the CarboardMain object from the scene and replace it with a regular Main Camera.  Then you'll need to enable "Virtual Reality Supported" in the Player Settings, before you build the app.
+
 
 
 
