@@ -5,12 +5,12 @@ PhysicMaterial:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Wood
-  dynamicFriction: 0.45
-  staticFriction: 0.45
-  bounciness: 0.1
-  frictionCombine: 0
-  bounceCombine: 0
+  m_Name: SportsBallsBouncy
+  dynamicFriction: 0.5
+  staticFriction: 1
+  bounciness: 0.8
+  frictionCombine: 3
+  bounceCombine: 3
 --- !u!1002 &13400001
 EditorExtensionImpl:
   serializedVersion: 6
