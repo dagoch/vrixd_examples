@@ -1,4 +1,4 @@
-# Examples of Prototyping Physical Interactions with VR
+# Prototyping Physical Interactions with VR
 
 Code samples for a quick and easy approach to prototyping physical interactions with mobile VR.
 
