@@ -2,8 +2,16 @@
 // The controller sends commands using REST Get requests
 // The Unity app connects to the server via socket.io
 
+// parse command line arguments
+var argv = require('minimist')(process.argv.slice(2));
 
+// default port
 var httpPort = 4567;
+// get port from -p command line argument, if given
+if ("p" in argv) {
+	console.log("got port parameter: "+argv.p);
+	httpPort = argv.p;
+}
 var http = require('http');
 
 var Router = require('node-simple-router');
