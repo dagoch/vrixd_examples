@@ -47,7 +47,7 @@ The sketch for the ESP8266 boards uses the ESP8266WiFi, ESP8266WiFiMulti, and ES
 
 ### Set up your Node server
 
-* On your computer, install node.js.  The code uses the socket.io and node-simple-router libraries.
+* On your computer, install node.js.  Then cd into the node-server directory of this project and type "npm install".  This will install the libraries the server code depends on.
 
 ### Set up your Unity project
 

@@ -35,7 +35,7 @@ const char* ssid     = "dagoch";
 const char* password = "mydevwifi";
 
 // this is ip address and port of the node server running on my laptop
-const char* host = "192.168.0.100"; // tp-link router  
+const char* host = "192.168.0.100"; // using my router  
 const int httpPort = 5678;
 
 const String moveCmd = "move";
