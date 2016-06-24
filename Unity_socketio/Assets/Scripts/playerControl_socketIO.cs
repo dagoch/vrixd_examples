@@ -1,6 +1,8 @@
 ﻿#region License
 /*
- * TestSocketIO.cs
+ * playerControl_socketIO.cs
+ * 
+ * modified from TestSocketIO.cs
  *
  * The MIT License
  *
@@ -30,13 +32,13 @@ using System.Collections;
 using UnityEngine;
 using SocketIO;
 
-public class controlSpeed_socketIO : MonoBehaviour
+public class playerControl_socketIO : MonoBehaviour
 {
 	private SocketIOComponent socket;
 
 	private bool moving = false;
 	CardboardHead head = null;
-	private ThrowBook throwBook;
+	private ThrowObj throwObj;
 	private bool sockIOError = false;
 	GameObject settingsScreen;
 
@@ -56,16 +58,16 @@ public class controlSpeed_socketIO : MonoBehaviour
 		settingsScreen.SetActive (false);
 
 		head = Camera.main.GetComponent<StereoController>().Head;
-		throwBook = GameObject.FindObjectOfType(typeof(ThrowBook)) as ThrowBook;
+		throwObj = GameObject.FindObjectOfType(typeof(ThrowObj)) as ThrowObj;
 
-		socket.On("open", TestOpen);
-		socket.On("boop", TestBoop);
-		socket.On("error", TestError);
-		socket.On("close", TestClose);
-		socket.On ("move", TestMove);
-		socket.On ("stop", TestStop);
+		socket.On("open", doOpen);
+		socket.On("error", doError);
+		socket.On("close", doClose);
+		socket.On ("move", doMove);
+		socket.On ("stop", doStop);
 		socket.On ("throw", doThrow);
-		socket.On ("restart", doRestart); 
+		socket.On ("restart", doRestart);
+		socket.On("boop", TestBoop);
 		
 
 	}
@@ -90,24 +92,21 @@ public class controlSpeed_socketIO : MonoBehaviour
 
 	}
 
-	public void TestOpen(SocketIOEvent e)
+	public void doOpen(SocketIOEvent e)
 	{
 		Debug.Log("[SocketIO] Open received: " + e.name + " " + e.data);
 	}
 
-	public void TestMove(SocketIOEvent e)
+	public void doMove(SocketIOEvent e)
 	{
 		Debug.Log("[SocketIO] Move received: " + e.name + " -> " + e.data);
 
 		moving = true;
-JSONObject dat = e.data.GetField ("mag");
+		JSONObject dat = e.data.GetField ("mag");
 
 		speed = float.Parse (dat.str);
 		Debug.Log ("[SocketIO] data: "+dat+" is type "+dat.type+" and yielded speed="+speed);
 
-	//	transform.Translate(Vector3.up * Time.deltaTime, Space.World);
-
-		//if (e.data == null) { return; }
 		
 		Debug.Log(
 			"#####################################################" +
@@ -120,7 +119,7 @@ JSONObject dat = e.data.GetField ("mag");
 	{
 		Debug.Log("[SocketIO] Throw received: " + e.name + " -> " + e.data);
 
-		throwBook.throwBook();
+		throwObj.throwObj();
 
 		if (e.data == null) { return; }
 		
@@ -148,7 +147,7 @@ JSONObject dat = e.data.GetField ("mag");
 			);
 	}
 		
-		public void TestStop(SocketIOEvent e)
+	public void doStop(SocketIOEvent e)
 	{
 		Debug.Log("[SocketIO] Stop received: " + e.name + " " + e.data);
 		
@@ -176,23 +175,17 @@ JSONObject dat = e.data.GetField ("mag");
 		);
 	}
 	
-	public void TestError(SocketIOEvent e)
+	public void doError(SocketIOEvent e)
 	{
-		Debug.Log("[SocketIO] TestError Event received: " + e.name + " " + e.data);
-		Debug.Log ("can i do something here?");
+		Debug.Log("[SocketIO] Error Event received: " + e.name + " " + e.data);
 		sockIOError = true;
 
 	}
 	
-	public void TestClose(SocketIOEvent e)
+	public void doClose(SocketIOEvent e)
 	{	
 		Debug.Log("[SocketIO] in TestSocketIO Close received: " + e.name + " " + e.data );
 	}
 
-	void OnCollisionEnter (Collision col) {
-		// NEED TO DO SOMETHING TO AVOID WALKING THROUGH THE WALLS OF THE ROOM!  even with player collision set to 
-		// continuous dynamic, if you're going fast enough you'll pass right through....  do walls need to be thicker?
-		// walls are "planes" so I just set their mesh collider to be "convex" and that seems to mostly fix it tho 
-		// it is still possible to push through them.  maybe should give them box colliders....
-	}
+
 }

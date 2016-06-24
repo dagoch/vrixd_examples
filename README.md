@@ -59,6 +59,9 @@ The sketch for the ESP8266 boards uses the ESP8266WiFi, ESP8266WiFiMulti, and ES
 
 
 
+*Thanks to http://www.robinwood.com/Catalog/FreeStuff/Textures/TexturePages/BallMaps.html for the ball textures.*
+
+
 
 
 

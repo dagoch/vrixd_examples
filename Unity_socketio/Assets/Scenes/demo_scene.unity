@@ -386,6 +386,10 @@ Prefab:
       propertyPath: pingInterval
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 010d39cbd03ee4c99a746c1f8ecdc0d8, type: 2}
+      propertyPath: ackExpirationTime
+      value: 600
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 010d39cbd03ee4c99a746c1f8ecdc0d8, type: 2}
   m_IsPrefabParent: 0
@@ -778,10 +782,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 463848278}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d973f6066649438481efb51dc932739, type: 3}
+  m_Script: {fileID: 11500000, guid: f7fdb6b11582b4bc19d02bffdb68d755, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bookPrefabs:
+  objPrefabs:
   - {fileID: 5430382, guid: 481026e4b91ef456f868fa8b47e600fa, type: 2}
   - {fileID: 5404960, guid: fa76082419bd34da8b08ff7c958ae31d, type: 2}
   - {fileID: 5494824, guid: 79f12d34e0784446993492eefcc14851, type: 2}
