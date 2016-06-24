@@ -8,20 +8,23 @@ The node server offers a REST interface to receive messages from the arduino and
 
 This project basically provides the plumbing between whatever kind of controller you build with your arduino, and the VR experience you build in Unity. For the purposes of demonstrating how it works, I've provided code assuming that you have two tilt switches attached to your arduino (put them perpendicular to each other, so a "throw" motion would trigger each in quick succession.)  And I've given you a basic Unity scene with some cardboard boxes, and a collection of balls you can throw.
 
-If you want to use tilt swtiches, I'd recommend these:
-http://tinkersphere.com/sensors/750-tilt-switch.html
-http://tinkersphere.com/sensors/1013-mercury-tilt-switch-6mm.html
 
-**Note:** There are many different ways to connect a microcontroller wirelessly to a Unity app, including ones that don't rely on an intermediary server.  The advantages of this method are: simple, cheap, reliable and easy to debug.  Having the intermediate server lets you monitor the communication flow between your Arduino and your Unity app, and allows you to test each component individually.  It is particularly useful when doing live demos, as it gives you a continuous health check, and lets you send commands directly to Unity, for example, to reset the game state without removing the phone from the VR headset.  The one big limitation of this approach is if you want continuously-varying inputs: using REST limits the rate at which you can send data from the controller, so it is really only suitable for sending discrete values that dno't change too quickly.
+**Note:** There are many different ways to connect a microcontroller wirelessly to a Unity app, including ones that don't rely on an intermediary server.  The advantages of this method are: simple, cheap, reliable and easy to debug.  Having the intermediate server lets you monitor the communication flow between your Arduino and your Unity app, and allows you to test each component individually.  It is particularly useful when doing live demos, as it gives you a continuous health check, and lets you send commands directly to Unity, for example, to reset the game state without removing the phone from the VR headset.  The one big limitation of this approach is if you want continuously-varying inputs: using REST limits the rate at which you can send data from the controller, so it is really only suitable for sending discrete values that don't change too quickly.
 
 
 ## Software and Hardware
 
 **You'll need the following:**
 
+* A local clone of this repo: `git clone https://github.com/dagoch/vrixd_examples.git`
+
 * A wifi microcontroller that can be programmed using Arduino.  Sample code is written for the Arduino Yun and the Adafruit Huzzah ESP8266 module.  
 
 * A switch or sensor that will be the input for your game.  Prototyping supplies like a breadboard and wires.  I also recommend using a battery to power your micrrocontroller and circuit.  If your micrcontroller board has a USB jack, you can use a USB battery to power it after you've programmed it.
+
+If you want to use tilt swtiches, I'd recommend these:
+http://tinkersphere.com/sensors/750-tilt-switch.html
+http://tinkersphere.com/sensors/1013-mercury-tilt-switch-6mm.html
 
 * The Arduino IDE plus the libraries for your board.
 
@@ -31,7 +34,7 @@ http://tinkersphere.com/sensors/1013-mercury-tilt-switch-6mm.html
 
 * If you're building for Google Cardboard, you'll need the Cardboard library for Unity
 
-* Either XCode or the Android SDK, depending on whether you want to deploy your VR app to an iOs or Android phone.
+* Either XCode or the Android SDK, depending on whether you want to deploy your VR app to an iOs or Android phone.  Also, the appropriate developer signing certificates so you can build onto your mobile phone.
 
 ### Choose your microcontroller
 
@@ -45,6 +48,8 @@ I recommend the Adafruit HUZZAH ESP8266 breakout or the Feather HUZZAH.  The for
 
 The sketch for the ESP8266 boards uses the ESP8266WiFi, ESP8266WiFiMulti, and ESP8266HTTPClient libraries, which you will install through the "Manage Libraries" tool in the Arduino IDE.
 
+A note on the ESP8266 boards: these have fewer I/O pins than the Arduino Yun, and have only one analog input.  If you want to build a controller with multiple analog inputs, it's probably not the best bet.  Also, the analog input has a maximum voltage of less than half of Vcc for the board, so you'll need to add a resistor as a voltage divider.
+
 ### Set up your Node server
 
 * On your computer, install node.js.  Then cd into the node-server directory of this project and type "npm install".  This will install the libraries the server code depends on.
@@ -55,7 +60,7 @@ The sketch for the ESP8266 boards uses the ESP8266WiFi, ESP8266WiFiMulti, and ES
 
 * For Google Cardboard, you need to install the Google Cardboard plugin.  Again, the sample project already includes this plugin.  
 
-* If, instead, you want to use Gear VR, you'll need to remove the CarboardMain object from the scene and replace it with a regular Main Camera.  Then you'll need to enable "Virtual Reality Supported" in the Player Settings, before you build the app.
+* If, instead, you want to use Gear VR, you'll need to remove the CarboardMain object from the scene and replace it with a regular Main Camera.  Then you'll need to enable "Virtual Reality Supported" in the Player Settings, before you build the app.  There will be a few small code changes you'd have to make as well.
 
 
 
