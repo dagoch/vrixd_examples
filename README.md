@@ -22,9 +22,9 @@ This project basically provides the plumbing between whatever kind of controller
 
 * A switch or sensor that will be the input for your game.  Prototyping supplies like a breadboard and wires.  I also recommend using a battery to power your micrrocontroller and circuit.  If your micrcontroller board has a USB jack, you can use a USB battery to power it after you've programmed it.
 
-If you want to use tilt swtiches, I'd recommend these:
-http://tinkersphere.com/sensors/750-tilt-switch.html
-http://tinkersphere.com/sensors/1013-mercury-tilt-switch-6mm.html
+  If you want to use tilt switches, I'd recommend these:  
+  http://tinkersphere.com/sensors/750-tilt-switch.html  
+  http://tinkersphere.com/sensors/1013-mercury-tilt-switch-6mm.html
 
 * The Arduino IDE plus the libraries for your board.
 
