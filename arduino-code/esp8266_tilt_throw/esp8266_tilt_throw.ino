@@ -18,6 +18,24 @@ GPIO #16 can be used to wake up out of deep-sleep mode, you'll need to connect i
 
   Tilt1 is connected between pin13 and GND
   Tilt2 is connected between pin5 and GND
+
+  NOTE: If using the NodeMCU devkit board, the pins on the board are different from the "arduino" pin numbers:
+  NodeMCU has weird pin mapping.
+Pin numbers written on the board itself do not correspond to ESP8266 GPIO pin numbers. We have constants defined to make using this board easier:
+
+static const uint8_t D0   = 16;
+static const uint8_t D1   = 5;
+static const uint8_t D2   = 4;
+static const uint8_t D3   = 0;
+static const uint8_t D4   = 2;
+static const uint8_t D5   = 14;
+static const uint8_t D6   = 12;
+static const uint8_t D7   = 13;
+static const uint8_t D8   = 15;
+static const uint8_t D9   = 3;
+static const uint8_t D10  = 1;
+(from: https://github.com/esp8266/Arduino/issues/584)
+(see also: https://github.com/nodemcu/nodemcu-devkit-v1.0)
   
 created 12 Jun 2016
 by David Gochfeld
@@ -52,6 +70,7 @@ const int redLED = 0; // on Adafruit Huzzah esp8266
 const int blueLED = 2; // on Adafruit Huzzah esp8266
 
 long tilt1OnTime;
+long tilt2OnTime;
 
 // This is how we communicate with the server
 void runCurl(String cmd) {
@@ -153,6 +172,10 @@ void onChange2() {
   laststate2 = state2;
   state2 = reading;
 
+  if (state2 == 1) {
+    tilt2OnTime =lastDebounceTime2;
+  }
+
 }
 
 
@@ -212,7 +235,7 @@ digitalWrite(blueLED, HIGH);
     Serial.println();
 
     tilt1OnTime = 0;
-        tilt1OnTime = 0;
+        tilt2OnTime = 0;
 }
 
 
@@ -221,7 +244,7 @@ void loop() {
     digitalWrite(blueLED, !state1);
     digitalWrite(redLED, !state2);
     
-  if (laststate1 != state1) {
+  if (laststate1 != state1) { // switch state has changed
     
     // Work with the value now.
     Serial.println("button 1 state change: " + String(state1));
@@ -229,7 +252,7 @@ void loop() {
 
   
   }
-    if (laststate2 != state2) {
+    if (laststate2 != state2) { // switch state has changed
     
     // Work with the value now.
     Serial.println("button 2 state change: " + String(state2));
@@ -240,7 +263,7 @@ void loop() {
     if ((millis() - tilt1OnTime < 500) && state2) {
      Serial.println("THROW!");
      tilt1OnTime = 0;
-             runCurl(throwCmd);
+     runCurl(throwCmd);
   }
 }
 

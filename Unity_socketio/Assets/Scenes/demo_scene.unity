@@ -745,23 +745,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 833561ca7310844c48123a5e8fedd251, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &463848283
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 463848278}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e18665e120e34716bff706d328ec64f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 2
-  walkWhenTriggered: 0
-  walkWhenLookDown: 1
-  thresholdAngle: 15
-  freezeYPosition: 0
-  yOffset: 0
 --- !u!65 &463848284
 BoxCollider:
   m_ObjectHideFlags: 0
