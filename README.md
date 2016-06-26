@@ -50,7 +50,7 @@ Sparkfun and others also have similar boards.
 
 The sketch for the ESP8266 boards uses the ESP8266WiFi, ESP8266WiFiMulti, and ESP8266HTTPClient libraries, which you will install through the "Manage Libraries" tool in the Arduino IDE.
 
-A note on the ESP8266 boards: these have fewer I/O pins than the Arduino Yun, and have only one analog input.  If you want to build a controller with multiple analog inputs, it's probably not the best bet.  Also, the analog input has a maximum voltage of less than half of Vcc for the board, so you'll need to add a resistor as a voltage divider.
+A note on the ESP8266 boards: these have fewer I/O pins than the Arduino Yun, and have only one analog input.  If you want to build a controller with multiple analog inputs, it's probably not the best bet.  Also, the analog input has a maximum voltage of less than half of Vcc for the board, so you'll need to add a resistor as a voltage divider. (See https://learn.sparkfun.com/tutorials/voltage-dividers).
 
 ### Set up your Node server
 
@@ -63,6 +63,9 @@ A note on the ESP8266 boards: these have fewer I/O pins than the Arduino Yun, an
 * For Google Cardboard, you need to install the Google Cardboard plugin.  Again, the sample project already includes this plugin.  
 
 * If, instead, you want to use Gear VR, you'll need to remove the CarboardMain object from the scene and replace it with a regular Main Camera.  Then you'll need to enable "Virtual Reality Supported" in the Player Settings, before you build the app.  There will be a few small code changes you'd have to make as well.
+
+  Also, in order to build for Gear VR you need to generate an Oculus Sig file for your phone, which you'll then include in your project.  Use this tool to generate the Sig file (you need an Oculus developer account, which is free): https://developer.oculus.com/osig/
+
 
 
 *Thanks to http://www.robinwood.com/Catalog/FreeStuff/Textures/TexturePages/BallMaps.html for the ball textures.*
